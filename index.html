@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi linda niña ❤️</title>
+    <title>Dedicapag - Un mensaje para mi princesa 💖</title>
     
-    <!-- Fuentes oficiales y elegantes -->
+    <!-- Fuentes oficiales de la plataforma -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
             position: relative;
         }
 
-        /* Corazones flotantes de fondo */
+        /* Fondo de corazones flotantes */
         .bg-hearts {
             position: absolute;
             top: 0;
@@ -56,7 +56,7 @@
             100% { transform: translateY(-105vh) translateX(50px) rotate(360deg); opacity: 0; }
         }
 
-        /* Contenedor principal */
+        /* Contenedor e interfaz principal */
         .wrapper {
             width: 100%;
             max-width: 420px;
@@ -77,7 +77,7 @@
             position: relative;
         }
 
-        /* Foto de perfil */
+        /* Foto de cabecera */
         .photo-container {
             position: relative;
             width: 115px;
@@ -151,7 +151,7 @@
             box-shadow: 0 12px 28px rgba(255, 75, 110, 0.45);
         }
 
-        /* Área de la carta animada */
+        /* Caja de la carta (Modificada para el efecto de máquina de escribir) */
         .letter-area {
             display: none;
             background: #fffafb;
@@ -162,28 +162,25 @@
             margin-top: 10px;
         }
 
-        /* Texto de la carta y cursor parpadeante */
         .letter-body {
             font-size: 0.98rem;
             line-height: 1.7;
             color: #4a5568;
+            white-space: pre-wrap; /* Crucial para respetar los párrafos */
             font-weight: 600;
-            display: inline;
         }
 
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            background-color: #ff4b6e;
-            margin-left: 2px;
-            animation: blink 0.6s infinite;
-            vertical-align: middle;
+        /* Cursor parpadeante simulado de escritura */
+        .letter-body::after {
+            content: "✍️";
+            animation: blink 0.8s infinite;
+            font-size: 1.1rem;
+            margin-left: 4px;
         }
 
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
+        /* Ocultar el cursor cuando termine de escribir */
+        .letter-body.done::after {
+            display: none;
         }
 
         .letter-sign {
@@ -196,7 +193,7 @@
             transition: opacity 1s ease;
         }
 
-        /* Reproductor de música */
+        /* Reproductor de música idéntico */
         .music-player {
             margin-top: 28px;
             display: inline-flex;
@@ -219,7 +216,12 @@
             color: white;
             font-size: 11px;
             cursor: pointer;
+            transition: background 0.2s;
             user-select: none;
+        }
+
+        .play-btn:hover {
+            background: #ff3358;
         }
 
         .music-info {
@@ -253,43 +255,45 @@
 </head>
 <body>
 
+    <!-- Corazones en el fondo -->
     <div class="bg-hearts" id="heartsGrid"></div>
 
     <div class="wrapper">
         <div class="main-card">
             
+            <!-- Foto Principal (Puedes cambiar este link de internet por una foto tuya si gustas) -->
             <div class="photo-container">
-                <!-- Puedes cambiar esta foto por una tuya o con ella usando un enlace directo -->
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=400&auto=format&fit=crop" alt="Para ti" class="photo-main">
-                <div class="mini-badge">❤️</div>
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=400&auto=format&fit=crop" alt="Para mi princesa" class="photo-main">
+                <div class="mini-badge">👑</div>
             </div>
 
+            <!-- Cabeceras -->
             <h1>Te dejaron una dedicatoria</h1>
-            <div class="author-text">De: Tu Amor</div>
+            <div class="author-text">De: Tu novio hermoso</div>
 
-            <!-- Botón para abrir el sobre -->
+            <!-- Botón Inicial -->
             <div id="triggerZone">
                 <button class="envelope-btn" onclick="openEnvelope()">
                     ✉️ Ver mensaje completo
                 </button>
             </div>
 
-            <!-- Contenedor de la carta con el efecto máquina de escribir -->
+            <!-- Carta Dinámica -->
             <div class="letter-area" id="boxLetter">
-                <span class="letter-body" id="typewriterText"></span><span class="cursor" id="cursor"></span>
-                <div class="letter-sign" id="letterSignature">Te amo muchisimo</div>
+                <div class="letter-body" id="textTarget"></div>
+                <div class="letter-sign" id="signatureTarget">Te amo muchísimo <3</div>
             </div>
 
-            <!-- Reproductor de música configurado con Mariposa de Enanitos Verdes -->
+            <!-- Reproductor Integrado con tu canción -->
             <div class="music-player">
                 <div class="play-btn" onclick="toggleAudio()" id="audioAction">▶</div>
                 <div class="music-info">
-                    <span class="music-title">Mariposa - Enanitos Verdes</span>
+                    <span class="music-title">Mariposa - Enanitos Verdes 🦋</span>
                     <span class="music-sub" id="audioState">Pausado</span>
                 </div>
             </div>
 
-            <!-- Link de audio configurado con un cover/pista limpia en streaming de internet -->
+            <!-- Archivo de la canción Mariposa -->
             <audio id="romanticSong" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
 
         </div>
@@ -300,7 +304,10 @@
     </div>
 
     <script>
-        // Generar corazones flotantes de fondo
+        // Tu texto exacto guardado en una variable
+        const fullText = `Mi amorr en esta carta te quiero decir que estoy muy feliz por ti, por lograr un objetivo más, sé que no fue fácil y piensas que no valio la pena pero vamos que si se puede, yo estare aqui para apoyarte siempre. te amo muchoo mi princesa y siempre reucerda que tienes a personas a que les preocupa que estes mal; y puedes decirnos cualquier cosa.\n\nFELICIDADES BBITA, lo lograste espero que te vaye bien en todo, este cargo no lo veas como una responsabilidad mas sé que lo es, pero vealo como una distraccion, no te estreses y bueno vamos mi amor a seguir cumpliendo más metas te amo muchisimo, muchos beshitos para ti.\n\nSé que no estoy ahi presente pero cuando nos veamos te hare sentir la persona más feliz, beshitos mi niña hermosa, gracias por compartir tú vida conmigo <33`;
+
+        // Generador de corazones de fondo
         const grid = document.getElementById('heartsGrid');
         const heartIcons = ['❤️', '💖', '💕', '✨'];
         for (let i = 0; i < 12; i++) {
@@ -314,49 +321,49 @@
             grid.appendChild(heart);
         }
 
-        // Tu texto exacto
-        const textToType = "Mi amorr en esta carta te quiero decir que estoy muy feliz por ti, por lograr un objetivo más, sé que no fue fácil y piensas que no valio la pena pero vamos que si se puede, yo estare aqui para apoyarte siempre. te amo muchoo mi princesa y siempre reucerda que tienes a personas a que les preocupa que estes mal; y puedes decirnos cualquier cosa.\n\nFELICIDADES BBITA, lo lograste espero que te vaye bien en todo, este cargo no lo veas como una responsabilidad mas sé que lo es, pero vealo como una distraccion, no te estreses y bueno vamos mi amor a seguir cumpliendo más metas te amo muchisimo, muchos beshitos para ti.\n\nSé que no estoy ahi presente pero cuando nos veamos te hare sentir la persona más feliz, beshitos mi niña hermosa, gracias por compartir tú vida conmigo <33";
-
-        let index = 0;
-        const speed = 45; // Velocidad de escritura en milisegundos por letra. Puedes bajarlo a 30 si quieres que escriba más rápido.
         const song = document.getElementById('romanticSong');
         const actionBtn = document.getElementById('audioAction');
         const stateTxt = document.getElementById('audioState');
 
+        // Función al abrir el sobre
         function openEnvelope() {
             document.getElementById('boxLetter').style.display = 'block';
             document.getElementById('triggerZone').style.display = 'none';
             
-            // Inicia la música de fondo automáticamente
+            // Iniciar la reproducción de la música
             song.play().then(() => {
                 actionBtn.innerText = "⏸";
                 stateTxt.innerText = "Reproduciendo";
             }).catch(() => {
-                console.log("Autoplay bloqueado inicialmente por el navegador.");
+                console.log("El navegador requiere play manual.");
             });
 
-            // Inicia la animación del texto
-            typeWriter();
+            // Iniciar el efecto de escritura progresiva
+            startTypingEffect();
         }
 
-        function typeWriter() {
-            if (index < textToType.length) {
-                let currentChar = textToType.charAt(index);
-                // Si encuentra un salto de línea en el texto string, añade la etiqueta HTML <br>
-                if (currentChar === '\n') {
-                    document.getElementById("typewriterText").innerHTML += "<br>";
+        // Efecto máquina de escribir por caracteres
+        function startTypingEffect() {
+            const target = document.getElementById('textTarget');
+            const signature = document.getElementById('signatureTarget');
+            let index = 0;
+
+            function type() {
+                if (index < fullText.length) {
+                    target.innerHTML += fullText.charAt(index);
+                    index++;
+                    // Ajusta este número (45) para hacer que escriba más rápido (menor número) o lento (mayor número)
+                    setTimeout(type, 45); 
                 } else {
-                    document.getElementById("typewriterText").innerHTML += currentChar;
+                    // Al finalizar quita el cursor y muestra la firma manuscrita
+                    target.classList.add('done');
+                    signature.style.opacity = '1';
                 }
-                index++;
-                setTimeout(typeWriter, speed);
-            } else {
-                // Al terminar de escribir, quita el cursor parpadeante y muestra la firma
-                document.getElementById("cursor").style.display = "none";
-                document.getElementById("letterSignature").style.opacity = "1";
             }
+            type();
         }
 
+        // Interruptor manual de audio
         function toggleAudio() {
             if (song.paused) {
                 song.play();
