@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dedicapag | Tu Mensaje Especial 💖</title>
+    
+    <!-- Fuentes premium idénticas al estilo de la plataforma -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --dedica-pink: #ff477e;
+            --dedica-pink-hover: #e03265;
+            --dedica-soft-pink: #ffccd5;
+            --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffe5ec 100%);
+            --card-background: rgba(255, 255, 255, 0.85);
+            --text-main: #2b2d42;
+            --text-muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- PANTALLA DE CARGA INICIAL (Estilo Dedicapag) --- */
+        #loader-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .heart-spinner {
+            width: 50px;
+            height: 50px;
+            background: var(--dedica-pink);
+            transform: rotate(45deg);
+            animation: heartBeat 1.2s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+            box-shadow: 0 0 20px rgba(255, 71, 126, 0.4);
+        }
+
+        .heart-spinner:before, .heart-spinner:after {
+            content: "";
+            background: var(--dedica-pink);
+            border-radius: 50%;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+
+        .heart-spinner:before { top: -25px; left: 0; }
+        .heart-spinner:after { left: -25px; top: 0; }
+
+        @keyframes heartBeat {
+            0% { transform: scale(0.95) rotate(45deg); }
+            5% { transform: scale(1.1) rotate(45deg); }
+            39% { transform: scale(0.85) rotate(45deg); }
+            45% { transform: scale(1) rotate(45deg); }
+            60% { transform: scale(0.95) rotate(45deg); }
+            100% { transform: scale(0.9) rotate(45deg); }
+        }
+
+        .loader-text {
+            margin-top: 40px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--dedica-pink);
+            letter-spacing: 1px;
+        }
+
+        /* --- PARTÍCULAS FLOTANTES DE FONDO --- */
+        .particles-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .bubble {
+            position: absolute;
+            background: rgba(255, 71, 126, 0.15);
+            border-radius: 50%;
+            animation: floatUp 10s infinite linear;
+            bottom: -50px;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.8; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .main-wrapper {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 5;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .dedica-card {
+            background: var(--card-background);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            width: 100%;
+            max-width: 450px;
+            border-radius: 28px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(255, 71, 126, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transform: scale(0.95);
+            opacity: 0;
+            animation: entryCard 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes entryCard {
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Imagen de perfil / Avatar */
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: 0 8px 25px rgba(255, 71, 126, 0.15);
+        }
+
+        .badge-icon {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background: var(--dedica-pink);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(255, 71, 126, 0.3);
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .meta-author {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 35px;
+        }
+
+        /* --- BOTÓN ABRE-SOBRE --- */
+        .open-envelope-btn {
+            background: var(--dedica-pink);
+            color: #ffffff;
+            border: none;
+            padding: 16px 36px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 71, 126, 0.35);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .open-envelope-btn:hover {
+            background: var(--dedica-pink-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 71, 126, 0.45);
+        }
+
+        /* --- CARTA DIGITAL OCULTA --- */
+        .letter-content-box {
+            display: none;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px 25px;
+            margin-top: 15px;
+            text-align: left;
+            border-left: 5px solid var(--dedica-pink);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.01), 0 10px 25px rgba(0,0,0,0.03);
+            animation: smoothUnfold 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes smoothUnfold {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .letter-paragraphs {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: #333333;
+            white-space: pre-line;
+        }
+
+        .letter-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.9rem;
+            color: var(--dedica-pink);
+            margin-top: 25px;
+            text-align: right;
+        }
+
+        /* --- REPRODUCTOR INTEGRADO --- */
+        .player-interface {
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-flex;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .play-pause-circle {
+            background: var(--dedica-pink);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .play-pause-circle:hover {
+            background: var(--dedica-pink-hover);
+        }
+
+        .track-details {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-main);
+            text-align: left;
+        }
+
+        .track-status {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        /* --- PIE DE PÁGINA PLATAFORMA --- */
+        .watermark {
+            margin-top: 40px;
+            font-size: 0.75rem;
+            color: #a5a5a5;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            padding-top: 20px;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Pantalla de carga simulada de Dedicapag -->
+    <div id="loader-screen">
+        <div class="heart-spinner"></div>
+        <div class="loader-text">PREPARANDO TU SORPRESA...</div>
+    </div>
+
+    <!-- 2. Fondo de Burbujas/Destellos -->
+    <div class="particles-bg" id="particlesContainer"></div>
+
+    <!-- 3. Contenedor e Interfaz de la Dedicatoria -->
+    <div class="main-wrapper">
+        <div class="dedica-card">
+            
+            <!-- Foto de portada configurable -->
+            <div class="avatar-container">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=300&auto=format&fit=crop" alt="Dedicatoria" class="avatar-img">
+                <div class="badge-icon">💖</div>
+            </div>
+
+            <!-- Títulos -->
+            <h1>Tienes una dedicatoria</h1>
+            <div class="meta-author">De: Tu persona favorita</div>
+
+            <!-- Botón interactivo central -->
+            <div id="ctaTrigger">
+                <button class="open-envelope-btn" onclick="revealDedication()">
+                    <span>✉️ Toca para abrir</span>
+                </button>
+            </div>
+
+            <!-- Caja de la Carta (Oculta al inicio) -->
+            <div class="letter-content-box" id="letterBox">
+                <div class="letter-paragraphs">
+                    Hola,
+
+                    Te envío este pequeño espacio digital diseñado solo para ti. Quería recordarte lo importante que eres en mi vida y lo mucho que aprecio cada momento que compartimos. 
+
+                    A veces los pequeños gestos dicen más que mil palabras. Gracias por tu apoyo, tus sonrisas y por hacer los días comunes mucho más especiales. ¡Espero haberte alegrado el día hoy!
+                </div>
+                <div class="letter-signature">Con todo mi cariño</div>
+            </div>
+
+            <!-- Mini reproductor dinámico inferior -->
+            <div>
+                <div class="player-interface">
+                    <div class="play-pause-circle" onclick="controlMusic()" id="playerBtn">▶</div>
+                    <div class="track-details">
+                        <span id="trackLabel">Música de fondo</span>
+                        <span class="track-status" id="trackStatus">Pausado</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enlace de audio de fondo (Cámbialo libremente por cualquier link directo a un .mp3) -->
+            <audio id="bgSong" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+
+            <!-- Copyright de marca de Dedicapag -->
+            <div class="watermark">
+                Dedicapag © 2026 • Mensajes con el Corazón
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Desactivar pantalla de carga tras simular conexión del servidor
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader-screen');
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.visibility = 'hidden';
+                }, 500);
+            }, 1800); // 1.8 segundos de carga estética
+        });
+
+        // Crear partículas dinámicas de fondo idénticas
+        const pContainer = document.getElementById('particlesContainer');
+        for (let i = 0; i < 12; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.style.left = Math.random() * 100 + '%';
+            const size = Math.random() * 20 + 10;
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.animationDelay = Math.random() * 8 + 's';
+            bubble.style.animationDuration = Math.random() * 6 + 7 + 's';
+            pContainer.appendChild(bubble);
+        }
+
+        // Referencias del reproductor
+        const audioTrack = document.getElementById('bgSong');
+        const pBtn = document.getElementById('playerBtn');
+        const pStatus = document.getElementById('trackStatus');
+
+        // Función para abrir el sobre e intentar autoplay de música
+        function revealDedication() {
+            document.getElementById('letterBox').style.display = 'block';
+            document.getElementById('ctaTrigger').style.display = 'none';
+            
+            // Forzar play de música al interactuar (Políticas modernas de Chrome/Safari)
+            audioTrack.play().then(() => {
+                pBtn.innerText = "⏸";
+                pStatus.innerText = "Reproduciendo...";
+            }).catch(() => {
+                console.log("Autoplay bloqueado por el navegador; requiere reproducción manual.");
+            });
+        }
+
+        // Control Manual del reproductor
+        function controlMusic() {
+            if (audioTrack.paused) {
+                audioTrack.play();
+                pBtn.innerText = "⏸";
+                pStatus.innerText = "Reproduciendo...";
+            } else {
+                audioTrack.pause();
+                pBtn.innerText = "▶";
+                pStatus.innerText = "Pausado";
+            }
+        }
+    </script>
+</body>
+</html>
