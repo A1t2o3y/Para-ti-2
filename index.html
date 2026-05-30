@@ -77,11 +77,11 @@
             position: relative;
         }
 
-        /* Foto de cabecera con tu imagen de WhatsApp */
+        /* Foto de cabecera con tu imagen exacta */
         .photo-container {
             position: relative;
-            width: 125px;
-            height: 125px;
+            width: 135px;
+            height: 135px;
             margin: 0 auto 20px;
         }
 
@@ -260,15 +260,15 @@
     <div class="wrapper">
         <div class="main-card">
             
-            <!-- Tu Foto de WhatsApp -->
+            <!-- Tu Foto de Portada con el nuevo archivo enviado -->
             <div class="photo-container">
-                <img src="WhatsApp Image 2026-05-29 at 2.26.17 PM (1).jpeg" alt="Nosotros" class="photo-main">
+                <img src="WhatsApp Image 2026-05-29 at 2.26.17 PM (1)_2.jpeg" alt="Nosotros" class="photo-main">
                 <div class="mini-badge">👑</div>
             </div>
 
             <!-- Cabeceras -->
-            <h1>Te dejaron una dedicatoria</h1>
-            <div class="author-text">De: Tu novio hermoso</div>
+            <h1>Espero te guste estas lindas palabras</h1>
+            <div class="author-text">De: Tu Thony Pony</div>
 
             <!-- Botón Inicial -->
             <div id="triggerZone">
@@ -292,8 +292,8 @@
                 </div>
             </div>
 
-            <!-- AQUÍ SE LLAMA A TU CANCIÓN LOCAL DIRECTAMENTE -->
-            <audio id="romanticSong" src="mariposa.mp3" loop></audio>
+            <!-- ENLACE DIRECTO A TU ARCHIVO DE MÚSICA DE ENANITOS VERDES -->
+            <audio id="romanticSong" src="Enanitos Verdes - Mariposas (1).mp3" loop></audio>
 
         </div>
 
@@ -334,7 +334,7 @@
                 actionBtn.innerText = "⏸";
                 stateTxt.innerText = "Reproduciendo";
             }).catch((err) => {
-                console.log("El navegador bloqueó el autoplay. Se reproducirá al interactuar.");
+                console.log("El navegador requiere interacción física para iniciar el audio.");
             });
 
             // Iniciar efecto máquina de escribir
