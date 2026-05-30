@@ -260,7 +260,7 @@
     <div class="wrapper">
         <div class="main-card">
             
-            <!-- Foto de Portada (Usando el archivo que indicaste) -->
+            <!-- Tu Foto de WhatsApp -->
             <div class="photo-container">
                 <img src="WhatsApp Image 2026-05-29 at 2.26.17 PM (1).jpeg" alt="Nosotros" class="photo-main">
                 <div class="mini-badge">👑</div>
@@ -283,7 +283,7 @@
                 <div class="letter-sign" id="signatureTarget">Te amo muchísimo <3</div>
             </div>
 
-            <!-- Reproductor con la canción oficial -->
+            <!-- Reproductor visual -->
             <div class="music-player">
                 <div class="play-btn" onclick="toggleAudio()" id="audioAction">▶</div>
                 <div class="music-info">
@@ -292,8 +292,8 @@
                 </div>
             </div>
 
-            <!-- Audio Nativo de los Enanitos Verdes -->
-            <audio id="romanticSong" src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4#t=0" loop></audio>
+            <!-- AQUÍ SE LLAMA A TU CANCIÓN LOCAL DIRECTAMENTE -->
+            <audio id="romanticSong" src="mariposa.mp3" loop></audio>
 
         </div>
 
@@ -303,7 +303,7 @@
     </div>
 
     <script>
-        // Carta exacta
+        // Tu hermosa carta
         const fullText = `Mi amorr en esta carta te quiero decir que estoy muy feliz por ti, por lograr un objetivo más, sé que no fue fácil y piensas que no valio la pena pero vamos que si se puede, yo estare aqui para apoyarte siempre. te amo muchoo mi princesa y siempre reucerda que tienes a personas a que les preocupa que estes mal; y puedes decirnos cualquier cosa.\n\nFELICIDADES BBITA, lo lograste espero que te vaye bien en todo, este cargo no lo veas como una responsabilidad mas sé que lo es, pero vealo como una distraccion, no te estreses y bueno vamos mi amor a seguir cumpliendo más metas te amo muchisimo, muchos beshitos para ti.\n\nSé que no estoy ahi presente pero cuando nos veamos te hare sentir la persona más feliz, beshitos mi niña hermosa, gracias por compartir tú vida conmigo <33`;
 
         // Generador de corazones de fondo
@@ -324,21 +324,17 @@
         const actionBtn = document.getElementById('audioAction');
         const stateTxt = document.getElementById('audioState');
 
-        // Intentar enlazar directamente el flujo de audio que usas
-        // Nota técnica: Como el elemento de audio maneja múltiples códecs, este link ejecutará tu pista.
-        song.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"; // Reemplaza aquí por tu archivo local "mariposa.mp3" si lo descargas en tu carpeta.
-
         // Función al abrir el sobre
         function openEnvelope() {
             document.getElementById('boxLetter').style.display = 'block';
             document.getElementById('triggerZone').style.display = 'none';
             
-            // Iniciar la reproducción de la música
+            // Iniciar la reproducción de tu música
             song.play().then(() => {
                 actionBtn.innerText = "⏸";
                 stateTxt.innerText = "Reproduciendo";
-            }).catch(() => {
-                console.log("El navegador requiere interacción.");
+            }).catch((err) => {
+                console.log("El navegador bloqueó el autoplay. Se reproducirá al interactuar.");
             });
 
             // Iniciar efecto máquina de escribir
