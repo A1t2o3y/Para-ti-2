@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dedicapag - Un mensaje para mi princesa 💖</title>
     
-    <!-- Fuentes oficiales de la plataforma -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -77,7 +76,7 @@
             position: relative;
         }
 
-        /* Foto de cabecera con tu imagen exacta */
+        /* Foto de cabecera con tu imagen de GitHub */
         .photo-container {
             position: relative;
             width: 135px;
@@ -254,36 +253,30 @@
 </head>
 <body>
 
-    <!-- Corazones en el fondo -->
     <div class="bg-hearts" id="heartsGrid"></div>
 
     <div class="wrapper">
         <div class="main-card">
             
-            <!-- Tu Foto de Portada con el nuevo archivo enviado -->
             <div class="photo-container">
-                <img src="WhatsApp Image 2026-05-29 at 2.26.17 PM (1)_2.jpeg" alt="Nosotros" class="photo-main">
+                <img src="WhatsApp Image 2026-05-29 at 2.26.17 PM (1).jpeg" alt="Nosotros" class="photo-main">
                 <div class="mini-badge">👑</div>
             </div>
 
-            <!-- Cabeceras -->
-            <h1>Espero te guste estas lindas palabras</h1>
-            <div class="author-text">De: Tu Thony Pony</div>
+            <h1>Te dejaron una dedicatoria</h1>
+            <div class="author-text">De: Tu novio hermoso</div>
 
-            <!-- Botón Inicial -->
             <div id="triggerZone">
                 <button class="envelope-btn" onclick="openEnvelope()">
                     ✉️ Ver mensaje completo
                 </button>
             </div>
 
-            <!-- Carta Dinámica -->
             <div class="letter-area" id="boxLetter">
                 <div class="letter-body" id="textTarget"></div>
                 <div class="letter-sign" id="signatureTarget">Te amo muchísimo <3</div>
             </div>
 
-            <!-- Reproductor visual -->
             <div class="music-player">
                 <div class="play-btn" onclick="toggleAudio()" id="audioAction">▶</div>
                 <div class="music-info">
@@ -292,8 +285,7 @@
                 </div>
             </div>
 
-            <!-- ENLACE DIRECTO A TU ARCHIVO DE MÚSICA DE ENANITOS VERDES -->
-            <audio id="romanticSong" src="Enanitos Verdes - Mariposas (1).mp3" loop></audio>
+            <audio id="romanticSong" src="mariposa.mp3" loop></audio>
 
         </div>
 
@@ -329,12 +321,12 @@
             document.getElementById('boxLetter').style.display = 'block';
             document.getElementById('triggerZone').style.display = 'none';
             
-            // Iniciar la reproducción de tu música
+            // Iniciar la reproducción de tu música limpia
             song.play().then(() => {
                 actionBtn.innerText = "⏸";
                 stateTxt.innerText = "Reproduciendo";
             }).catch((err) => {
-                console.log("El navegador requiere interacción física para iniciar el audio.");
+                console.log("El navegador requiere interacción para activar el sonido.");
             });
 
             // Iniciar efecto máquina de escribir
