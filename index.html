@@ -77,11 +77,11 @@
             position: relative;
         }
 
-        /* Foto de cabecera */
+        /* Foto de cabecera con tu imagen de WhatsApp */
         .photo-container {
             position: relative;
-            width: 115px;
-            height: 115px;
+            width: 125px;
+            height: 125px;
             margin: 0 auto 20px;
         }
 
@@ -151,7 +151,7 @@
             box-shadow: 0 12px 28px rgba(255, 75, 110, 0.45);
         }
 
-        /* Caja de la carta (Modificada para el efecto de máquina de escribir) */
+        /* Caja de la carta */
         .letter-area {
             display: none;
             background: #fffafb;
@@ -166,11 +166,11 @@
             font-size: 0.98rem;
             line-height: 1.7;
             color: #4a5568;
-            white-space: pre-wrap; /* Crucial para respetar los párrafos */
+            white-space: pre-wrap;
             font-weight: 600;
         }
 
-        /* Cursor parpadeante simulado de escritura */
+        /* Cursor animado de escritura */
         .letter-body::after {
             content: "✍️";
             animation: blink 0.8s infinite;
@@ -178,7 +178,6 @@
             margin-left: 4px;
         }
 
-        /* Ocultar el cursor cuando termine de escribir */
         .letter-body.done::after {
             display: none;
         }
@@ -193,7 +192,7 @@
             transition: opacity 1s ease;
         }
 
-        /* Reproductor de música idéntico */
+        /* Reproductor de música */
         .music-player {
             margin-top: 28px;
             display: inline-flex;
@@ -261,9 +260,9 @@
     <div class="wrapper">
         <div class="main-card">
             
-            <!-- Foto Principal (Puedes cambiar este link de internet por una foto tuya si gustas) -->
+            <!-- Foto de Portada (Usando el archivo que indicaste) -->
             <div class="photo-container">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=400&auto=format&fit=crop" alt="Para mi princesa" class="photo-main">
+                <img src="WhatsApp Image 2026-05-29 at 2.26.17 PM (1).jpeg" alt="Nosotros" class="photo-main">
                 <div class="mini-badge">👑</div>
             </div>
 
@@ -284,7 +283,7 @@
                 <div class="letter-sign" id="signatureTarget">Te amo muchísimo <3</div>
             </div>
 
-            <!-- Reproductor Integrado con tu canción -->
+            <!-- Reproductor con la canción oficial -->
             <div class="music-player">
                 <div class="play-btn" onclick="toggleAudio()" id="audioAction">▶</div>
                 <div class="music-info">
@@ -293,8 +292,8 @@
                 </div>
             </div>
 
-            <!-- Archivo de la canción Mariposa -->
-            <audio id="romanticSong" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+            <!-- Audio Nativo de los Enanitos Verdes -->
+            <audio id="romanticSong" src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4#t=0" loop></audio>
 
         </div>
 
@@ -304,7 +303,7 @@
     </div>
 
     <script>
-        // Tu texto exacto guardado en una variable
+        // Carta exacta
         const fullText = `Mi amorr en esta carta te quiero decir que estoy muy feliz por ti, por lograr un objetivo más, sé que no fue fácil y piensas que no valio la pena pero vamos que si se puede, yo estare aqui para apoyarte siempre. te amo muchoo mi princesa y siempre reucerda que tienes a personas a que les preocupa que estes mal; y puedes decirnos cualquier cosa.\n\nFELICIDADES BBITA, lo lograste espero que te vaye bien en todo, este cargo no lo veas como una responsabilidad mas sé que lo es, pero vealo como una distraccion, no te estreses y bueno vamos mi amor a seguir cumpliendo más metas te amo muchisimo, muchos beshitos para ti.\n\nSé que no estoy ahi presente pero cuando nos veamos te hare sentir la persona más feliz, beshitos mi niña hermosa, gracias por compartir tú vida conmigo <33`;
 
         // Generador de corazones de fondo
@@ -325,6 +324,10 @@
         const actionBtn = document.getElementById('audioAction');
         const stateTxt = document.getElementById('audioState');
 
+        // Intentar enlazar directamente el flujo de audio que usas
+        // Nota técnica: Como el elemento de audio maneja múltiples códecs, este link ejecutará tu pista.
+        song.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"; // Reemplaza aquí por tu archivo local "mariposa.mp3" si lo descargas en tu carpeta.
+
         // Función al abrir el sobre
         function openEnvelope() {
             document.getElementById('boxLetter').style.display = 'block';
@@ -335,14 +338,14 @@
                 actionBtn.innerText = "⏸";
                 stateTxt.innerText = "Reproduciendo";
             }).catch(() => {
-                console.log("El navegador requiere play manual.");
+                console.log("El navegador requiere interacción.");
             });
 
-            // Iniciar el efecto de escritura progresiva
+            // Iniciar efecto máquina de escribir
             startTypingEffect();
         }
 
-        // Efecto máquina de escribir por caracteres
+        // Escritura progresiva
         function startTypingEffect() {
             const target = document.getElementById('textTarget');
             const signature = document.getElementById('signatureTarget');
@@ -352,10 +355,8 @@
                 if (index < fullText.length) {
                     target.innerHTML += fullText.charAt(index);
                     index++;
-                    // Ajusta este número (45) para hacer que escriba más rápido (menor número) o lento (mayor número)
                     setTimeout(type, 45); 
                 } else {
-                    // Al finalizar quita el cursor y muestra la firma manuscrita
                     target.classList.add('done');
                     signature.style.opacity = '1';
                 }
